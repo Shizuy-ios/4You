@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Para Ti · Diario de poemas</title>
+    <meta name="description" content="Un diario digital de poemas, cartas y recuerdos para alguien especial." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="ambient-glow"></div>
+    <header class="app-header">
+      <div class="brand-block">
+        <p class="eyebrow">Diario íntimo</p>
+        <h1>Para Ti</h1>
+        <p class="subtitle">Una página nueva cada día, una memoria que nunca se borra.</p>
+      </div>
+      <div class="header-actions">
+        <button id="theme-toggle" class="soft-btn" aria-label="Alternar modo claro y oscuro">☾</button>
+        <button id="today-btn" class="soft-btn">Volver a hoy</button>
+      </div>
+      <nav class="main-nav" aria-label="Secciones del diario">
+        <button class="nav-btn active" data-section="home">Inicio</button>
+        <button class="nav-btn" data-section="library">Biblioteca</button>
+        <button class="nav-btn" data-section="calendar">Calendario</button>
+        <button class="nav-btn" data-section="favorites">Favoritos</button>
+        <button class="nav-btn" data-section="about">Sobre este diario</button>
+      </nav>
+    </header>
+
+    <main class="app-shell">
+      <section id="home-section" class="panel active" aria-labelledby="home-title">
+        <div class="hero-stats">
+          <div class="stat-card">
+            <span class="stat-label">Poemas escritos</span>
+            <strong id="poem-count">0</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Días desde el primero</span>
+            <strong id="days-since-first">0</strong>
+          </div>
+        </div>
+
+        <article id="poem-page" class="poem-page">
+          <img id="poem-image" class="page-image" src="images/diary-cover.svg" alt="Portada del diario" />
+          <div class="page-content">
+            <div class="page-meta">
+              <span id="poem-date" class="page-date"></span>
+              <span class="page-badge">Página del día</span>
+            </div>
+            <h2 id="poem-title"></h2>
+            <div id="poem-text" class="poem-text" aria-live="polite"></div>
+            <div class="page-signature">— <span id="poem-author"></span></div>
+            <div class="page-actions">
+              <button id="prev-btn" class="action-btn">← Anterior</button>
+              <button id="favorite-toggle" class="action-btn favorite-btn" aria-pressed="false">♡</button>
+              <button id="share-btn" class="action-btn">Compartir</button>
+              <button id="next-btn" class="action-btn">Siguiente →</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="library-section" class="panel" aria-labelledby="library-title">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Biblioteca</p>
+            <h2 id="library-title">Todos los poemas guardados</h2>
+          </div>
+        </div>
+        <div class="toolbar">
+          <label class="search-box">
+            <span>🔎</span>
+            <input id="search-input" type="search" placeholder="Buscar un poema" />
+          </label>
+          <label>
+            <span class="visually-hidden">Filtrar por año</span>
+            <select id="year-filter">
+              <option value="all">Todos los años</option>
+            </select>
+          </label>
+          <label>
+            <span class="visually-hidden">Filtrar por mes</span>
+            <select id="month-filter">
+              <option value="all">Todos los meses</option>
+            </select>
+          </label>
+        </div>
+        <div id="library-list" class="card-grid"></div>
+      </section>
+
+      <section id="calendar-section" class="panel" aria-labelledby="calendar-title">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Calendario</p>
+            <h2 id="calendar-title">Los días que tienen poema</h2>
+          </div>
+        </div>
+        <div class="calendar-card">
+          <div class="calendar-header">
+            <button id="calendar-prev" class="soft-btn">◀</button>
+            <h3 id="calendar-label"></h3>
+            <button id="calendar-next" class="soft-btn">▶</button>
+          </div>
+          <div id="calendar-grid" class="calendar-grid"></div>
+        </div>
+      </section>
+
+      <section id="favorites-section" class="panel" aria-labelledby="favorites-title">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Favoritos</p>
+            <h2 id="favorites-title">Poemas que quieres guardar cerca</h2>
+          </div>
+        </div>
+        <div id="favorites-list" class="card-grid"></div>
+      </section>
+
+      <section id="about-section" class="panel" aria-labelledby="about-title">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Sobre este diario</p>
+            <h2 id="about-title">Un libro vivo para alguien especial</h2>
+          </div>
+        </div>
+        <div class="about-card">
+          <p>
+            Este diario lo hice a razon de que no puedes hablar, lastimosamente no pude hacerlo en una aplicacion de telefono y asi puedas leerlo cuando quieras aun sin conexion, se que esto no arreglara el echo de no poderte comprar algo hoy pero si espero que minimo te guste, obviamente tanpoco lo voy a dejar asi, te voy a comprar algo si, pero tal vez te lo de regresando a clases 
+          </p>
+          <p>
+            Aquí cada poema es de los que he escrito, y algo que debo aclarar es que no son los mismos que puse en la libreta (que aun no acabo xd) si no cada uno es diferente y escrito por mi para que nunca olvides que no importa que pase yo te amo como no tienes idea.
+          </p>
+        </div>
+      </section>
+    </main>
+
+
+    <footer class="app-footer">
+      <p>Para Ti · un diario de poemas unicos para una persona única.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>

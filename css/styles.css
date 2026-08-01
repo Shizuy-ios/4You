@@ -1,0 +1,423 @@
+:root {
+  color-scheme: light;
+  --bg: #f7efe7;
+  --bg-2: #efe0c9;
+  --panel: rgba(255, 248, 240, 0.9);
+  --panel-strong: rgba(255, 250, 244, 0.96);
+  --text: #4c3a2c;
+  --muted: #7e6750;
+  --accent: #9b6b45;
+  --accent-2: #b18663;
+  --border: rgba(108, 76, 48, 0.16);
+  --shadow: 0 20px 60px rgba(80, 54, 31, 0.14);
+}
+
+body[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #18110b;
+  --bg-2: #261b12;
+  --panel: rgba(34, 24, 16, 0.9);
+  --panel-strong: rgba(44, 30, 20, 0.96);
+  --text: #f5e6d1;
+  --muted: #c6a683;
+  --accent: #e1b27a;
+  --accent-2: #b88758;
+  --border: rgba(255, 235, 212, 0.14);
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  background: linear-gradient(135deg, var(--bg), var(--bg-2));
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.18), transparent 32%), radial-gradient(circle at bottom right, rgba(155, 107, 69, 0.12), transparent 30%);
+  animation: drift 16s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.16) 50%, transparent 100%);
+  animation: shimmer 10s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-header, .app-shell, .admin-card, .app-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.app-header {
+  padding: 2rem 1.5rem 1rem;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.brand-block {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(18px);
+  border-radius: 28px;
+  padding: 1.6rem 1.5rem;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.74rem;
+  color: var(--accent);
+  margin: 0 0 0.4rem;
+}
+
+h1, h2, h3 {
+  font-family: 'Cormorant Garamond', serif;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 4vw, 3.15rem);
+  margin-bottom: 0.4rem;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.nav-btn, .soft-btn, .action-btn {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  padding: 0.7rem 0.95rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.nav-btn:hover, .soft-btn:hover, .action-btn:hover {
+  transform: translateY(-2px);
+  background: var(--panel-strong);
+}
+
+.nav-btn.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+}
+
+.app-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 2rem;
+}
+
+.panel {
+  display: none;
+}
+
+.panel.active {
+  display: block;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stat-card, .poem-page, .admin-card, .calendar-card, .about-card, .library-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.stat-card {
+  border-radius: 20px;
+  padding: 1rem 1.2rem;
+}
+
+.stat-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+}
+
+.stat-card strong {
+  font-size: 1.35rem;
+}
+
+.poem-page {
+  border-radius: 30px;
+  padding: 1.3rem;
+  transition: transform 0.45s ease, opacity 0.4s ease;
+}
+
+.poem-page.page-turn {
+  animation: pageTurn 0.7s ease both;
+}
+
+.page-image {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 22px;
+  margin-bottom: 1rem;
+}
+
+.page-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+}
+
+.page-badge {
+  background: rgba(155, 107, 69, 0.12);
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+}
+
+.poem-page h2 {
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  margin-bottom: 0.9rem;
+}
+
+.poem-text {
+  white-space: pre-line;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  color: var(--text);
+  min-height: 240px;
+}
+
+.page-signature {
+  margin-top: 1rem;
+  font-style: italic;
+  color: var(--accent);
+}
+
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.2rem;
+}
+
+.favorite-btn.active {
+  background: linear-gradient(135deg, #b84d5f, #e05a72);
+  color: #fff;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--panel);
+  min-width: min(100%, 320px);
+}
+
+.search-box input, select, textarea, input[type='text'], input[type='date'] {
+  border: none;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  width: 100%;
+}
+
+select {
+  padding: 0.7rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.library-card {
+  border-radius: 22px;
+  padding: 1rem;
+}
+
+.library-card button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.library-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.35rem;
+}
+
+.library-card p {
+  margin: 0.25rem 0;
+  color: var(--muted);
+}
+
+.calendar-card, .about-card, .admin-card {
+  border-radius: 24px;
+  padding: 1rem;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.calendar-grid .day-name {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.82rem;
+  padding-bottom: 0.35rem;
+}
+
+.calendar-day {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.6rem 0;
+  background: rgba(255, 255, 255, 0.36);
+  color: var(--text);
+  min-height: 44px;
+}
+
+.calendar-day.has-poem {
+  background: linear-gradient(135deg, rgba(155, 107, 69, 0.2), rgba(177, 134, 99, 0.3));
+}
+
+.calendar-day.today {
+  outline: 2px solid var(--accent);
+}
+
+.admin-form {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.admin-form label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+.admin-form textarea {
+  resize: vertical;
+  min-height: 120px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 0.8rem;
+}
+
+.wide {
+  width: 100%;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 1rem 1.5rem 2rem;
+  color: var(--muted);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@keyframes drift {
+  from { transform: translate3d(-3%, -2%, 0) scale(1); }
+  to { transform: translate3d(3%, 2%, 0) scale(1.05); }
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(110%); }
+}
+
+@keyframes pageTurn {
+  0% { opacity: 0; transform: rotateY(18deg) translateY(20px); }
+  100% { opacity: 1; transform: rotateY(0deg) translateY(0); }
+}
+
+@media (max-width: 780px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+}

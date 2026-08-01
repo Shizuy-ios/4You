@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5f0e6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e3d5b5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="600" fill="url(#grad)" stroke="#c19a6b" stroke-width="8" rx="16"/>
+  <text x="200" y="240" font-family="Georgia, serif" font-size="28" fill="#8b5a2b" text-anchor="middle" font-weight="bold">Para Ti</text>
+  <text x="200" y="290" font-family="Georgia, serif" font-size="16" fill="#a67b5b" text-anchor="middle">un diario de poemas</text>
+  <path d="M80 350 Q200 400 320 350" stroke="#d2b48c" stroke-width="1" fill="none" stroke-dasharray="4,3"/>
+  <text x="200" y="560" font-family="Georgia, serif" font-size="12" fill="#a67b5b" text-anchor="middle">Brandon</text>
+</svg>
