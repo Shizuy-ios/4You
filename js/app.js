@@ -136,17 +136,28 @@ function renderCurrentPoem() {
   updateFavoriteButton(poem.fecha);
 }
 
+let poemTypingInterval = null;
+
 function renderPoemText(text) {
-  elements.poemText.textContent = '';
-  const typeSpeed = 20;
-  let index = 0;
-  const interval = setInterval(() => {
-    elements.poemText.textContent += text[index] || '';
-    index += 1;
-    if (index >= text.length) {
-      clearInterval(interval);
+    if (poemTypingInterval) {
+        clearInterval(poemTypingInterval);
+        poemTypingInterval = null;
     }
-  }, typeSpeed);
+
+    elements.poemText.textContent = '';
+
+    const typeSpeed = 20;
+    let index = 0;
+
+    poemTypingInterval = setInterval(() => {
+        elements.poemText.textContent += text[index] || '';
+        index += 1;
+
+        if (index >= text.length) {
+            clearInterval(poemTypingInterval);
+            poemTypingInterval = null;
+        }
+    }, typeSpeed);
 }
 
 function changePoem(direction) {
