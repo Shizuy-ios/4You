@@ -299,7 +299,42 @@ function init() {
   applyStoredTheme();
   createMusicButton();
   bindEvents();
+  registerFirstInteraction();
   loadPoems();
+}
+
+/**
+ * Habilita la reproducción automática tras la primera interacción
+ * del usuario (click/keydown/touch) y elimina los listeners.
+ */
+function registerFirstInteraction() {
+  const handler = () => {
+    music.enabled = true;
+    localStorage.setItem(
+      STORAGE_KEYS.musicEnabled,
+      JSON.stringify(true)
+    );
+
+    updateMusicButton();
+
+    // Asegurar que el botón existe
+    createMusicButton();
+
+    // Si no hay src cargado pero el poema actual tiene pista, cárgala
+    const poem = state.poems[state.currentIndex];
+    if (!music.audio.src && poem && (poem.musica || poem.music)) {
+      loadPoemMusic(poem);
+    }
+
+    // Intentar reproducir (el navegador permitirá tras interacción)
+    music.audio.play().catch((err) => {
+      console.log('Reproducción tras interacción falló:', err);
+    });
+  };
+
+  ['click', 'keydown', 'touchstart'].forEach((ev) =>
+    document.addEventListener(ev, handler, { once: true })
+  );
 }
 
 /* =========================
